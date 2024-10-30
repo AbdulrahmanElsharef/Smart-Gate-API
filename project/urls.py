@@ -23,29 +23,29 @@ from Product.api import *
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # path('Command/list', Voice_Command_List_API.as_view()),
-    # path('Command/list<int:pk>', Voice_Command_Detail_API.as_view()),
+    path('Command/list', Voice_Command_List_API.as_view()),
+    path('Command/list/<int:id>', Voice_Command_Detail_API.as_view()),
     
-    # path('ad/list', AD_List_API.as_view()),
-    # path('ad/list<int:pk>', Action_Detail_API.as_view()),
+    path('ad/list', AD_List_API.as_view()),
+    path('ad/list/<int:id>', AD_Detail_API.as_view()),
 
-    # path('complaint/list', Complaint_List_API.as_view()),
-    # path('complaint/list<int:pk>', Complaint_Detail_API.as_view()),
+    path('complaint/list', Complaint_List_API.as_view()),
+    path('complaint/list/<int:idt>', Complaint_Detail_API.as_view()),
 
-    # path('action/list', Action_List_API.as_view()),
-    # path('action/list<int:pk>', Action_Detail_API.as_view()),
+    path('action/list', Action_List_API.as_view()),
+    path('action/list/<int:id>', Action_Detail_API.as_view()),
 
-    # path('item/list', Item_List_API.as_view()),
-    # path('item/list<int:pk>', Item_Detail_API.as_view()),
+    path('item/list', Item_List_API.as_view()),
+    path('item/list/<int:id>', Item_Detail_API.as_view()),
 
-    # path('product/list', Product_List_API.as_view()),
-    # path('product/list<int:pk>', Product_List_API.as_view()),
+    path('product/list', Product_List_API.as_view()),
+    path('product/list/<int:id>', Product_Detail_API.as_view()),
 
-    # path('room/list', Room_List_API.as_view()),
-    # path('room/list<int:pk>', Room_Detail_API.as_view()),
+    path('room/list', Room_List_API.as_view()),
+    path('room/list/<int:id>', Room_Detail_API.as_view()),
 
-    # path('user/list', CustomUser_List_API.as_view()),
-    # path('user/list<int:pk>', CustomUser_Detail_API.as_view()),
+    path('user/list', CustomUser_List_API.as_view()),
+    path('user/list/<int:id>', CustomUser_Detail_API.as_view()),
 
 
     

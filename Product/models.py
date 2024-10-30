@@ -4,24 +4,24 @@ from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
 
 
-
-
 def CustomUser_directory(instance, filename):
     return f"Product/{instance.user.username}--{filename}"
 class CustomUser(models.Model):
-    user = models.OneToOneField(User,related_name='CustomUser',on_delete=models.CASCADE)
-    phone=models.CharField(max_length=20,unique=True)
+    username = models.CharField(("Name"),max_length=100)
+    phone=models.IntegerField(("Phone_Number"),unique=True)
+    email=models.EmailField(("Email"),null=True,blank=True)
+    password = models.CharField(("PassWord"),max_length=12)
     image = models.FileField(upload_to='CustomUser/image',null=True,blank=True,default='default.png')
 
     def __str__(self):
-        return str(self.user.username)
+        return str(self.username)
 
-@receiver(post_save,sender=User)
-def create_profile(sender,instance,created,**kwargs):
-    if created:
-        CustomUser.objects.create(
-            user=instance
-        )
+# @receiver(post_save,sender=User)
+# def create_profile(sender,instance,created,**kwargs):
+#     if created:
+#         CustomUser.objects.create(
+#             user=instance
+#         )
 
 class Room(models.Model):
     title = models.CharField(max_length=100)
@@ -58,14 +58,14 @@ class Action(models.Model):
     value = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.id}_{self.product.name}"
+        return f"{self.id}_{self.item}"
     
-@receiver(pre_save, sender=Action)
+@receiver(post_save, sender=Action)
 def set_switch_state_and_value(sender, instance, created, **kwargs):
     if created:
         # Here, you'll need to implement the logic to determine the switch_state based on the ID
         # You can use a lookup table, a calculation, or any other method to set the appropriate state.
-        instance.state = f"switch_state{instance.id}"
+        instance.state = f"switch_state-{instance.id}"
         instance.save()
 
 def update_directory(instance, filename):
@@ -80,7 +80,7 @@ class Update(models.Model):
         return f"{self.id}_{self.product.name}"
 
 class Item(models.Model):
-    products = models.ManyToManyField(Product,verbose_name="Product", related_name='Product_Items')
+    products = models.ForeignKey(Product,verbose_name="Product", related_name='Product_Items',on_delete=models.PROTECT)
     device_name = models.CharField(max_length=100,null=True, blank=True)
     item_mac_ip=models.CharField(max_length=100,null=True,blank=True,unique=True)
     # actions = models.JSONField(default=dict)
@@ -88,7 +88,7 @@ class Item(models.Model):
     last_version = models.IntegerField(default=1)
     do_update_now = models.BooleanField(default=False)
     # Store users as JSONField
-    users_list = models.ManyToManyField(CustomUser, related_name='used_item')
+    users_list = models.ForeignKey(CustomUser,verbose_name="User", related_name='User_Item',on_delete=models.PROTECT)
 
     # Store voice commands as JSONField
     room=models.ForeignKey(Room,verbose_name="Room", on_delete=models.PROTECT,related_name="Room_Item")
@@ -105,9 +105,11 @@ class Voice_Command(models.Model):
 
     def __str__(self):
         return f"{self.id}_{self.item.device_name}"
-    
+
+
 def AD_directory(instance, filename):
     return f"Product/{instance.title}--{filename}"
+
 class AD(models.Model):
     title = models.CharField(max_length=50)
     message = models.TextField(max_length=255)
