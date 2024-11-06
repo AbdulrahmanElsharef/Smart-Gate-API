@@ -5,7 +5,7 @@ from .models import *
 #     list_display = [field.name for field in YourModel._meta.fields]
 
 class ActionTabularInline(admin.TabularInline):
-     model = Action
+     model = Product_Action
      extra = 0
 
 class UpdateTabularInline(admin.TabularInline):
@@ -36,12 +36,12 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [UpdateTabularInline,ItemTabularInline]  
+    inlines = [UpdateTabularInline,ItemTabularInline,ActionTabularInline]  
     list_display =[field.name for field in Product._meta.fields]
 
 @admin.register(Item)
 class ItemsAdmin(admin.ModelAdmin):
-    inlines = [Voice_CommandTabularInline,ActionTabularInline,ComplaintInline]  
+    inlines = [Voice_CommandTabularInline,ComplaintInline]  
     list_display =[field.name for field in Item._meta.fields]
 
 @admin.register(AD)
@@ -52,9 +52,9 @@ class ADAdmin(admin.ModelAdmin):
 class ComplaintAdmin(admin.ModelAdmin):
     list_display =[field.name for field in Complaint._meta.fields]
 
-@admin.register(Action)
+@admin.register(Product_Action)
 class ActionAdmin(admin.ModelAdmin):
-    list_display =[field.name for field in Action._meta.fields]
+    list_display =[field.name for field in Product_Action._meta.fields]
 
 @admin.register(Update)
 class UpdateAdmin(admin.ModelAdmin):
