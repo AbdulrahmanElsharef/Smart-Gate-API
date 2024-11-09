@@ -24,31 +24,34 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('Command/list', Voice_Command_List_API.as_view()),
-    path('Command/list/<str:slug>', Voice_Command_Detail_API.as_view()),
-    
+    path('Command/list/<str:id>', Voice_Command_Detail_API.as_view()),
+
     path('ad/list', AD_List_API.as_view()),
-    path('ad/list/<str:slug>', AD_Detail_API.as_view()),
+    path('ad/list/<str:id>', AD_Detail_API.as_view()),
 
     path('complaint/list', Complaint_List_API.as_view()),
-    path('complaint/list/<int:idt>', Complaint_Detail_API.as_view()),
+    path('complaint/list/<int:id>', Complaint_Detail_API.as_view()),
 
     path('action/list', Action_List_API.as_view()),
-    path('action/list/<str:slug>', Action_Detail_API.as_view()),
+    path('action/list/<str:id>', Action_Detail_API.as_view()),
 
-    path('item/list', Item_List_API.as_view()),
-    path('item/list/<str:slug>', Item_Detail_API.as_view()),
+    path('items', Items_API.as_view()),
+    path('items/<str:id>', Item_Detail_API.as_view()),
+    path('listitems', Item_list_API.as_view()),
 
-    path('product/list', Product_List_API.as_view()),
-    path('product/list/<str:slug>', Product_Detail_API.as_view()),
+    path('products', Products_API.as_view()),
+    path('products/<str:id>', Product_Detail_API.as_view()),
+
+    path('listproducts', ListProductApi.as_view()),
 
     path('room/list', Room_List_API.as_view()),
-    path('room/list/<str:slug>', Room_Detail_API.as_view()),
+    path('room/list/<str:id>', Room_Detail_API.as_view()),
 
     path('user/list', CustomUser_List_API.as_view()),
-    path('user/list/<str:slug>', CustomUser_Detail_API.as_view()),
+    path('user/list/<str:id>', CustomUser_Detail_API.as_view()),
 
 
-    
+
 ]
 
 

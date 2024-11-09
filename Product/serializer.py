@@ -40,18 +40,16 @@ class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Update
         # fields= ["last_version_number","last_version_url",'product']
-        fields= "__all__"    
+        fields= "__all__"
         # exclude = ('id',)
 
-
-
-class ItemSerializer(serializers.ModelSerializer):
+class Item_list_Serializer(serializers.ModelSerializer):
     products= serializers.StringRelatedField()
     users_list= serializers.StringRelatedField()
     room = serializers.StringRelatedField()
     voice_command=Voice_CommandSerializer(source='Item_Voice_Command',many=True)
     Complaint=ComplaintSerializer(source='Item_Complaint',many=True)
-    # Actions = Actionesrializer(source='Item_Action',many=True) 
+    # Actions = Actionesrializer(source='Item_Action',many=True)
     # update=UpdateSerializer(source='Item_Complaint',many=True)
 
     class Meta:
@@ -60,11 +58,23 @@ class ItemSerializer(serializers.ModelSerializer):
         fields= "__all__"
         # exclude = ('id',)
 
-class ProductSerializer(serializers.ModelSerializer):
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        # fields= ["name","mac_ip","is_assigned","last_version_number","do_update_now",'products',"users_list","room","voice_command","Complaint"]
+        fields= "__all__"
+        # exclude = ('id',)
+
+class listProductSerializer(serializers.ModelSerializer):
     Update = UpdateSerializer(source='Product_Update',many=True)
     items = ItemSerializer(source='Product_Items',many=True)
-    Actions = Actionesrializer(source='Product_Action',many=True) 
-
+    Actions = Actionesrializer(source='Product_Action',many=True)
+    class Meta:
+        model = Product
+        # fields= ['name',"electricity_consumption","image_url","last_version_number","last_version_url","items","Update"]
+        fields= "__all__"
+        # exclude = ('id',)
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         # fields= ['name',"electricity_consumption","image_url","last_version_number","last_version_url","items","Update"]

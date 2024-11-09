@@ -26,22 +26,22 @@ class ComplaintInline(admin.TabularInline):
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    inlines = [ItemTabularInline,ComplaintInline]  
+    inlines = [ItemTabularInline,ComplaintInline]
     list_display =[field.name for field in CustomUser._meta.fields]
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    inlines = [ItemTabularInline]  
+    inlines = [ItemTabularInline]
     list_display =[field.name for field in Room._meta.fields]
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [UpdateTabularInline,ItemTabularInline,ActionTabularInline]  
+    inlines = [UpdateTabularInline,ItemTabularInline,ActionTabularInline]
     list_display =[field.name for field in Product._meta.fields]
 
 @admin.register(Item)
 class ItemsAdmin(admin.ModelAdmin):
-    inlines = [Voice_CommandTabularInline,ComplaintInline]  
+    inlines = [Voice_CommandTabularInline,ComplaintInline]
     list_display =[field.name for field in Item._meta.fields]
 
 @admin.register(AD)

@@ -16,12 +16,12 @@ class CustomUser(models.Model):
     email=models.EmailField(("Email"),null=True,blank=True)
     password = models.CharField(("PassWord"),max_length=12)
     image = models.FileField(upload_to='CustomUser/image',null=True,blank=True,default='default.png')
-    slug = models.SlugField(null=True,blank=True)
+    # slug = models.SlugField(null=True,blank=True)
 
 
     def __str__(self):
         return f" {self.username}"
-    
+
     # def save(self, *args, **kwargs):
     #     if self.password:
     #         self.password = make_password(self.password)
@@ -41,14 +41,14 @@ class Room(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100,default="Room")
     image_url = models.URLField(null=True, blank=True)
-    slug = models.SlugField(null=True,blank=True)
+    # slug = models.SlugField(null=True,blank=True)
 
     def __str__(self):
         return f" {self.title}"
-    
-    def save(self, *args, **kwargs):
-       self.slug = slugify(self.id)
-       super(Room, self).save(*args, **kwargs)
+
+    # def save(self, *args, **kwargs):
+    #   self.slug = slugify(self.id)
+    #   super(Room, self).save(*args, **kwargs)
 
 
 
@@ -61,19 +61,19 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     electricity_consumption = models.FloatField(default=0)
     image_url = models.FileField(upload_to=product_directory,max_length=200,null=True,blank=True)
-    # Store actions as 
+    # Store actions as
     last_version_number = models.IntegerField(default=1)
     last_version_url = models.FileField(upload_to=f"Product/version_url/{product_directory}",max_length=200,null=True,blank=True)
-    slug = models.SlugField(null=True,blank=True)
+    # slug = models.SlugField(null=True,blank=True)
 
     def __str__(self):
         return f" {self.name}"
-    
-    def save(self, *args, **kwargs):
-       self.slug = slugify(self.id)
-       super(Product, self).save(*args, **kwargs)
-    
-    
+
+    # def save(self, *args, **kwargs):
+    #   self.slug = slugify(self.id)
+    #   super(Product, self).save(*args, **kwargs)
+
+
 
 class Product_Action(models.Model):
     product=models.ForeignKey(Product,verbose_name="Product", on_delete=models.PROTECT,related_name="Product_Action")
@@ -83,14 +83,14 @@ class Product_Action(models.Model):
 
     def __str__(self):
         return f"{self.state}_{self.value}"
-    
+
 class Item_Action(Product_Action):
     item=models.ForeignKey('Item',verbose_name="Item", on_delete=models.PROTECT,related_name="Product_Action")
 
 
     def __str__(self):
         return f"{self.state}_{self.value}"
-    
+
 # @receiver(post_save, sender=Action)
 # def set_switch_state_and_value(sender, instance, created, **kwargs):
 #     if created:
@@ -109,7 +109,7 @@ class Update(models.Model):
 
     def __str__(self):
         return f"{self.id}_{self.product.name}"
-    
+
 
 class Item(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -121,16 +121,16 @@ class Item(models.Model):
     do_update_now = models.BooleanField(default=False)
     users_list = models.ForeignKey(CustomUser,verbose_name="User", related_name='User_Item',on_delete=models.PROTECT)
     room=models.ForeignKey(Room,verbose_name="Room", on_delete=models.PROTECT,related_name="Room_Item")
-    slug = models.SlugField(null=True,blank=True)
+    # slug = models.SlugField(null=True,blank=True)
 
 
     def __str__(self):
         return f"Item {self.id}:{self.name}"
-    
-    def save(self, *args, **kwargs):
-       self.slug = slugify(self.id)
-       super(Item, self).save(*args, **kwargs)
-       
+
+    # def save(self, *args, **kwargs):
+    #   self.slug = slugify(self.id)
+    #   super(Item, self).save(*args, **kwargs)
+
 
 class Voice_Command(models.Model):
     item=models.ForeignKey(Item,verbose_name="Item", on_delete=models.PROTECT,related_name="Item_Voice_Command")
@@ -154,7 +154,7 @@ class AD(models.Model):
 
     def __str__(self):
         return self.title
-    
+
 
 class Complaint(models.Model):
     title = models.CharField(max_length=50)
