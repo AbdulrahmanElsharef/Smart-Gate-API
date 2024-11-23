@@ -2,6 +2,16 @@ from rest_framework import generics
 from .serializer import *
 from.models import *
 
+
+class Test_List_API(generics.ListCreateAPIView):
+    serializer_class = TestSerializer
+    queryset = Test.objects.all()
+    
+class Test_Detail_API(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TestSerializer
+    queryset = Test.objects.all()
+    lookup_field = 'id'
+
 class Voice_Command_List_API(generics.ListCreateAPIView):
     serializer_class = Voice_CommandSerializer
     queryset = Voice_Command.objects.all()

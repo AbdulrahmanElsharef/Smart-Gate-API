@@ -49,6 +49,12 @@ class Room(models.Model):
     # def save(self, *args, **kwargs):
     #   self.slug = slugify(self.id)
     #   super(Room, self).save(*args, **kwargs)
+class Test(models.Model):
+    test = models.IntegerField()
+    # slug = models.SlugField(null=True,blank=True)
+
+    def __str__(self):
+        return f" {self.test}"
 
 
 

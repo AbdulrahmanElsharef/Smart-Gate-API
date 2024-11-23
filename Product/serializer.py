@@ -106,6 +106,17 @@ class ListUserSerializer(serializers.ModelSerializer):
         # fields= ['name',"electricity_consumption","image_url","last_version_number","last_version_url","items","Update"]
         fields= "__all__"
         # exclude = ('id',)
+        
+        
+class TestSerializer(serializers.ModelSerializer):
+    # items=ItemSerializer(source='User_Item',many=True)
+    # Complaint=ComplaintSerializer(source='Customer_Complaint',many=True)
+    class Meta:
+        model = Test
+        # fields= ['name',"electricity_consumption","image_url","last_version_number","last_version_url","items","Update"]
+        fields= "__all__"
+        # exclude = ('id',)
+
 
 
 
