@@ -72,6 +72,8 @@ class Room_Detail_API(generics.RetrieveUpdateDestroyAPIView):
     queryset = Room.objects.all()
     lookup_field = 'id'
 
+
+
 class CustomUser_List_API(generics.ListCreateAPIView):
     serializer_class = CustomUserSerializer
     queryset = CustomUser.objects.all()
@@ -79,3 +81,6 @@ class CustomUser_Detail_API(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CustomUserSerializer
     queryset = CustomUser.objects.all()
     lookup_field = 'id'
+class ListUserApi(generics.ListCreateAPIView):
+    serializer_class = ListUserSerializer
+    queryset = Product.objects.all()

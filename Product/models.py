@@ -22,11 +22,11 @@ class CustomUser(models.Model):
     def __str__(self):
         return f" {self.username}"
 
-    # def save(self, *args, **kwargs):
-    #     if self.password:
-    #         self.password = make_password(self.password)
-    #     self.slug = slugify(self.id)
-    #     super(CustomUser, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.password:
+            self.password = make_password(self.password)
+        self.slug = slugify(self.id)
+        super(CustomUser, self).save(*args, **kwargs)
 
 
 
