@@ -23,6 +23,9 @@ from Product.api import *
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('test', Test_List_API.as_view()),
+    path('test/<int:id>', Test_Detail_API.as_view()),
+
     path('list/Command', Voice_Command_List_API.as_view()),
     path('list/Command/<str:id>', Voice_Command_Detail_API.as_view()),
 
