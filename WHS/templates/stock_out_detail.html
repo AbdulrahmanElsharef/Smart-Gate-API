@@ -1,0 +1,117 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Stock_OUT_print</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    @media print {
+        button {
+            display: none;  
+        }
+    }
+</style>
+
+</head>
+<body>
+
+
+  <div class="invoice-box">
+    <div id="legalcopy">
+      <button type="button"  onclick="window.print()"  style="background-color: aqua;color:black;font-size:large">PRINT>></button>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="row" style="margin: top 5px;;">
+          <div class="equalHWrap eqWrap nomargin-nopadding to-block">
+
+            <div class="equalHW eq nomargin-nopadding title">
+              Customer
+            </div>
+            <div class="equalHW eq nomargin-nopadding title from-block">
+              Transfer 
+            </div>
+            <div class="equalHW eq nomargin-nopadding title from-block">
+              Location 
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="equalHWrap eqWrap">
+              <div class="equalHW eq infoblock to-block">
+                <span id="CustomerName">Name : {{stock.customer}}</span><br>
+                <span id="AccountProject">Note : {{stock.note}}</span><br>
+              </div>
+              <div class="equalHW eq infoblock from-block">
+                <span id="AccountName"> NO : {{stock}}</span><br>
+                <span id="AccountProject"> Date : {{stock.created}}</span><br>
+              </div>
+              <div class="equalHW eq infoblock from-block">
+                <span id="AccountName"> Destnation : {{stock.location}}</span><br>
+                {% comment %} <span id="AccountProject"> Date : {{stock.created}}</span><br> {% endcomment %}
+              </div>
+
+            </div>
+          </div>
+          <table class="table">
+            <tr class="titles">
+              {% comment %} <th>WHS</th> {% endcomment %}
+              <th>Barcode</th>
+              <th>Name</th>
+              <th>Serial</th>
+              <th>Sku</th>
+              <th>Brand</th>
+              <th>Color</th>
+              <th>UOM</th>
+              <th>QY</th>
+              <th>Safty</th>
+            </tr>
+
+            {% for t in stock.Stock_Out_Detail.all %}
+            <tr class="item">
+              {% comment %} <td><span id="ProuductName">{{t.location}}<span></span></span></td> {% endcomment %}
+              <td><span id="ProuductName">{{t.item.id}}<span></span></span></td>
+              <td><span id="ProductNumUnits">{{t.item.name}}<span></span></span></td>
+              <td><span id="ProductUnit">{{t.serial}}<span></span></span></td>
+              <td><span id="ProductUnitPrice">{{t.item.sku}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.brand}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.color}}</span></td>
+              <td><span id="ProductTax">{{t.item.uom}}</span></td>
+              <td><span id="ProductTax">{{t.quantity}}</span></td>
+              <td><span id="ProductTax">{{t.item.safety}}</span></td>
+            </tr>
+            {% endfor %}
+          </table>{% load static %}
+        </div>
+        <div class="row">
+          <div class="equalHWrap eqWrap nomargin-nopadding to-block">
+            <div class="equalHW eq nomargin-nopadding title">
+              Recived By 
+            </div>
+            <div class="equalHW eq nomargin-nopadding title from-block">
+
+            </div>
+            <div class="equalHW eq nomargin-nopadding title info-block">
+              Deliverd By
+            </div>
+          </div>
+          <div class="row">
+            <div class="equalHWrap eqWrap">
+              <div class="equalHW eq infoblock to-block">
+                <span id="CustomerName">-------------------</span><br>
+              </div>
+              <div class="equalHW eq infoblock from-block">
+              </div>
+              <div class="equalHW eq infoblock info-block">
+                <span id="">-------------------</span> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

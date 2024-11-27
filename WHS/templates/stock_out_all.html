@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Stock_Out</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+  <div class="invoice-box">
+    <div class="container">
+      <div class="row">
+        <div class="row" style="margin-top:20px;">
+          <div>
+            <h2>Stock Out Report</h2>
+          </div>
+          <table class="table">
+            <tr class="titles">
+              <th>Transaction</th>
+              <th>Customer</th>
+              <th>Location</th>
+              <th>Total</th>
+              <th>Note</th>
+              <th>Created </th>
+              <th>Print</th>
+              {% for stock in all_stock %}
+            </tr>
+            <tr class="item">
+              <td><span id="ProuductName">{{stock}}<span></span></span></td>
+              <td><span id="ProductNumUnits">{{stock.customer}}<span></span></span></td>
+              <td><span id="ProductUnit">{{stock.location}}<span></span></span></td>
+              <td><span id="ProductUnit">{{stock.Total}}<span></span></span></td>
+              <td><span id="ProductDiscount">{{stock.note}}</span></td>
+              <td><span id="ProductUnitPrice">{{stock.created}}</span></td>
+              <td><a href="{% url 'stock_out' stock.id %}"><button type="button" class="btn btn-primary">Print</button></a></td>
+            </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

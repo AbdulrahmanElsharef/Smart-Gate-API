@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>WHS Rport</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+  <div class="invoice-box">
+    <div class="container">
+      <div class="row">
+        <div class="row" style="margin: top 5px;;">
+          <div>
+            <h2>{{whs}} Whs Report</h2>
+          </div>
+          <table class="table">
+            <tr class="titles">
+              <th>Barcode</th>
+              <th>Name</th>
+              <th>Serial</th>
+              <th>Sku</th>
+              <th>Brand</th>
+              <th>Color</th>
+              <th>UOM</th>
+              <th>Stock</th>
+              <th>Safty</th>
+              <th>Status</th>
+            </tr>
+            {% comment %} {% if WHS.Stock_In_location%} {% endcomment %}
+            {% comment %} {% if whs.Stock_In_location.stock_in %} {% endcomment %}
+            {% for t in whs.Stock_In_location.all %}
+            <tr class="item">
+              <td><span id="ProuductName">{{t.item.id}}<span></span></span></td>
+              <td><span id="ProductNumUnits">{{t.item.name}}<span></span></span></td>
+              <td><span id="ProductUnit">{{t.serial}}<span></span></span></td>
+              <td><span id="ProductUnitPrice">{{t.item.sku}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.brand}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.color}}</span></td>
+              <td><span id="ProductTax">{{t.item.uom}}</span></td>
+              <td><span id="ProductTax">{{t.item.Stock}}</span></td>
+              <td><span id="ProductTax">{{t.item.safety}}</span></td>
+              <td><span id="ProductTax">{{t.item.Status}}</span></td>
+            </tr>
+            {% endfor %}
+ {% comment %} {% elif whs.Stock_In_location.stock_out %} {% endcomment %}
+              {% for t in whs.Stock_Out_location.all %}
+            <tr class="item">
+              <td><span id="ProuductName">{{t.item.id}}<span></span></span></td>
+              <td><span id="ProductNumUnits">{{t.item.name}}<span></span></span></td>
+              <td><span id="ProductUnit">{{t.serial}}<span></span></span></td>
+              <td><span id="ProductUnitPrice">{{t.item.sku}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.brand}}</span></td>
+              <td><span id="ProductDiscount">{{t.item.color}}</span></td>
+              <td><span id="ProductTax">{{t.item.uom}}</span></td>
+              <td><span id="ProductTax">{{t.item.Stock}}</span></td>
+              <td><span id="ProductTax">{{t.item.safety}}</span></td>
+              <td><span id="ProductTax">{{t.item.Status}}</span></td>
+            </tr>
+            {% endfor %}  
+            {% comment %} {% endif %} {% endcomment %}
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

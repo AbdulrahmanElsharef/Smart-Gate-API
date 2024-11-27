@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>WHS REPORT</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+  <div class="invoice-box">
+    <div class="container">
+      <div class="row">
+        <div class="row" style="margin-top:20px;">
+          <div>
+            <h2>WHS Report</h2>
+          </div>
+ 
+          <table class="table">
+            <tr class="titles">
+              <th>Name</th>
+              <th>Detail</th>
+              {% comment %} <th>Total</th> {% endcomment %}
+              <th>Note</th>
+              <th>Created </th>
+              <th>Print</th>
+              {% for whs in all_whs %}
+            </tr>
+            <tr class="item">
+              <td><span id="ProuductName">{{whs}}<span></span></span></td>
+              <td><span id="ProductNumUnits">{{whs.supplier}}<span></span></span></td>
+              {% comment %} <td><span id="ProductUnit">{{whs.Total}}<span></span></span></td> {% endcomment %}
+              <td><span id="ProductDiscount">{{whs.note}}</span></td>
+              <td><span id="ProductUnitPrice">{{whs.created}}</span></td>
+              <td><a href="{% url 'whs' whs.id %}"><button type="button" class="btn btn-primary">Report</button></a></td>
+            </tr>
+            {% endfor %}
+
+          </table>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
