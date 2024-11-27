@@ -32,9 +32,9 @@ JAZZMIN_SETTINGS = {
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "CONF"},{"app": "WHS"},
 
-        {"name": "STOCK_IN", "url": "http://10.0.0.21:8000/stock_in/",
+        {"name": "STOCK_IN", "url": "https://smartgate.pythonanywhere.com/stock_in/",
             "new_window": True},
-        {"name": "STOCK_OUT", "url": "http://10.0.0.21:8000/stock_out",
+        {"name": "STOCK_OUT", "url": "https://smartgate.pythonanywhere.com/stock_out",
             "new_window": True},
         # {"name": "Report", "url": "http://altawheedtech.pythonanywhere.com/report",
         #     "new_window": True},
